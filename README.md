@@ -1,0 +1,1 @@
+compile with command: npm install --legacy-peer-deps
