@@ -30,7 +30,7 @@ function Servicios() {
             >
               <img
                 alt="Sticker principal"
-                src={require("assets/img/check.png")}
+                src={require("assets/img/cara1.png")}
                 style={{
                   width: "80%",
                   maxWidth: "300px", // Limita el tamaño máximo
@@ -56,12 +56,12 @@ function Servicios() {
                   color: "#1c1862", // Color sólido
                 }}
               >
-                Da el primer paso hacia tu bienestar. Agenda tu cita y empieza a sentirte mejor hoy.
+                Tu mente en armonía, tu vida en equilibrio.
               </p>
               <Button
                 style={{
                   backgroundColor: "#fc71f0", // Rosado por defecto
-                  border: "2px solid #fc71f0",
+                  border: "2px solid #E0C4DF",
                   color: "white",
                   fontWeight: "bold",
                   padding: "10px 20px",
@@ -71,17 +71,17 @@ function Servicios() {
                 }}
                 onMouseOver={(e) => {
                   e.target.style.backgroundColor = "white";
-                  e.target.style.color = "#fc71f0";
+                  e.target.style.color = "#E0C4DFinstagram";
                 }}
                 onMouseOut={(e) => {
-                  e.target.style.backgroundColor = "#fc71f0";
+                  e.target.style.backgroundColor = "#E0C4DF";
                   e.target.style.color = "white";
                 }}
                 href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2cHr6QweJLZXKEm2eIutWH2S1pB82Slw77iLFpLu6LIx3c5Pz57zto3PMwFIHf2-8bh1Anq4NN"
                 target="_blank"
                 aria-label="Agendar reunión"
               >
-               Solo Llámanos
+               Realiza tu Cita
               </Button>
             </Col>
           </Row>

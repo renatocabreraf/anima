@@ -21,17 +21,17 @@ function ScrollTransparentNavbar() {
 
   const [navbarColor, setNavbarColor] = useState(" navbar-transparent");
   const [logoSrc, setLogoSrc] = useState(
-    require("assets/img/logoAnima2.png")
+    require("assets/img/anima1.png")
   );
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
         setNavbarColor("");
-        setLogoSrc(require("assets/img/logoAnima3.png"));
+        setLogoSrc(require("assets/img/anima2.png"));
       } else {
         setNavbarColor(" navbar-transparent");
-        setLogoSrc(require("assets/img/logoAnima2.png"));
+        setLogoSrc(require("assets/img/anima1.png"));
       }
     };
 

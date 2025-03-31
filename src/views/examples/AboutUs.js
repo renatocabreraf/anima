@@ -1,223 +1,99 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollTransparentNavbar from 'components/Navbars/ScrollTransparentNavbar';
 import Footer from 'components/Footers/Footer';
 
-const initialPhotosData = [
-  {
-    id: 1,
-    src: 'https://cdn.kindmindgt.com/assets/img/R.png',
-    modalImg: '/r2.jpg',
-    title: 'Renato Cabrera',
-    subtitle: 'CEO & Fundador',
-    description:
-      'Renato es Project Manager certificado en SCRUM, ITIL 4, Lean Six Sigma, con experiencia en gerencia y dirección de proyectos tecnológicos...',
-    linkedin: 'https://www.linkedin.com/in/renatocabreraf',
-  },
-  {
-    id: 2,
-    src: 'https://cdn.kindmindgt.com/assets/img/mro2.png',
-    modalImg: '/_25A2716.jpg',
-    title: 'María Reneé Ordoñez',
-    subtitle: 'CXO',
-    description:
-      'Experta en desarrollo de negocios y experiencia de usuario. Parte de múltiples equipos dedicados al desarrollo en Guatemala.',
-    linkedin: 'https://www.linkedin.com/in/al-grano-con-renee-bb7475b3',
-  },
-  {
-    id: 3,
-    src: 'https://cdn.kindmindgt.com/assets/img/j.png',
-    modalImg: '/_25A2606.jpg',
-    title: 'José Herrera',
-    subtitle: 'CIO & Co-Fundador',
-    description:
-      'Ingeniero en Informática, con experiencia en banca e instrumentos financieros. Experto en Gobernanza y Gestión de Datos.',
-    linkedin: 'https://www.linkedin.com/in/joseherrera7/',
-  },
-  {
-    id: 4,
-    src: 'https://cdn.kindmindgt.com/assets/img/e.png',
-    modalImg: '/_25A2652.jpg',
-    title: 'Emmanuel Alvarado',
-    subtitle: 'CTO & Co-Fundador',
-    description:
-      'Senior Developer, experto en servicios en la nube y arquitecturas modernas de software.',
-    linkedin: 'https://www.linkedin.com/in/emmanuel-alvarado-jl99/',
-  },
-  {
-    id: 5,
-    src: '/chiwi5.png',
-    modalImg: '/chiwi4.png',
-    title: 'Francisco Alonzo',
-    subtitle: 'CDO & Co-Fundador',
-    description:
-      'Analista de datos y BI. Experto en transformar negocios a través de la interpretación estratégica de datos.',
-    linkedin: 'https://www.linkedin.com/in/fjalonzoc/',
-  },
-];
+const jessicaProfile = {
+  id: 1,
+  src: '/jessica.jpg',
+  modalImg: '/jessica-modal.jpg',
+  title: 'Jessica Ovalle',
+  subtitle: 'Licenciada en Psicología',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt, sapien eget efficitur facilisis, neque purus dignissim turpis, vitae tincidunt justo quam non nisi.',
+  linkedin: 'https://www.linkedin.com/in/jessicaovalle',
+};
 
-function AboutUs() {
-  const [photos, setPhotos] = useState(initialPhotosData);
+function AboutJessica() {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef(null);
-  const intervalRef = useRef(null);
-
-  const isMobile = window.innerWidth <= 768;
-
-  const startAutoScroll = () => {
-    if (!isMobile) {
-      stopAutoScroll();
-      intervalRef.current = setInterval(() => {
-        if (containerRef.current) {
-          containerRef.current.scrollLeft += 1.5;
-        }
-      }, 16);
-    }
-  };
-
-  const stopAutoScroll = () => {
-    clearInterval(intervalRef.current);
-  };
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (!isMobile) {
-      startAutoScroll();
-    }
-    return () => clearInterval(intervalRef.current);
-  }, [isMobile]);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleClickPhoto = (photo) => {
     setSelectedPhoto(photo);
   };
 
   const handleCloseModal = () => {
-    if (selectedPhoto) {
-      setPhotos((prevPhotos) =>
-        prevPhotos.map((p) =>
-          p.id === selectedPhoto.id
-            ? { ...p, src: selectedPhoto.modalImg, modalImg: selectedPhoto.src }
-            : p
-        )
-      );
-    }
     setSelectedPhoto(null);
   };
 
-  const nextPhoto = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % photos.length);
-  };
-
-  const prevPhoto = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? photos.length - 1 : prevIndex - 1
-    );
-  };
-
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: scrolled ? '#fff' : '#E1F2F5',
+        transition: 'background-color 0.4s ease-in-out',
+        minHeight: '100vh',
+      }}
+    >
       <ScrollTransparentNavbar />
       <div className="wrapper"></div>
       <Container style={{ padding: '30px 0' }}>
         <Row>
           <Col className="text-center">
-            <h2 style={{ fontWeight: 'bold', color: '#333' }}>Nuestro Equipo</h2>
+            <h2 style={{ fontWeight: 'bold', color: '#333' }}>Sobre Jessica Ovalle</h2>
             <p style={{ fontSize: '20px', color: '#555' }}>
-              Conoce a las mentes detrás de las soluciones.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec justo vel justo scelerisque faucibus.
             </p>
           </Col>
         </Row>
 
-        {/* Sección para escritorio */}
-        {!isMobile && (
-          <div
-            ref={containerRef}
-            style={{
-              overflowX: 'auto',
-              display: 'flex',
-              gap: '20px',
-              marginTop: '20px',
-              scrollBehavior: 'smooth',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              touchAction: 'pan-y',
-              position: 'relative',
-            }}
-            onMouseEnter={stopAutoScroll}
-            onMouseLeave={startAutoScroll}
-          >
-            {[...photos, ...photos].map((photo, index) => (
-              <div
-                key={index}
+        <Row className="justify-content-center mt-5">
+          {[1, 2, 3, 4].map((i) => (
+            <Col key={i} md="3" className="mb-4 d-flex justify-content-center">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
                 style={{
-                  minWidth: '450px',
-                  height: '500px',
+                  width: '100%',
+                  height: '300px',
                   borderRadius: '15px',
-                  backgroundImage: `url(${photo.src})`,
+                  backgroundImage: `url(/photo${i}.jpg)`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  cursor: 'pointer',
                 }}
-                onClick={() => handleClickPhoto(photo)}
               />
-            ))}
-          </div>
-        )}
+            </Col>
+          ))}
+        </Row>
 
-        {/* Sección para móvil */}
-        {isMobile && (
-          <div style={{ position: 'relative', marginTop: '20px', height: '500px' }}>
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                borderRadius: '15px',
-                backgroundImage: `url(${photos[currentIndex].src})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                cursor: 'pointer',
-              }}
-              onClick={() => handleClickPhoto(photos[currentIndex])}
-            />
-            <button
-              onClick={prevPhoto}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '10px',
-                transform: 'translateY(-50%)',
-                background: 'rgba(0, 0, 0, 0.5)',
-                border: 'none',
-                color: 'white',
-                fontSize: '2rem',
-                cursor: 'pointer',
-                padding: '10px',
-                zIndex: 10,
-              }}
-            >
-              ‹
-            </button>
-            <button
-              onClick={nextPhoto}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                right: '10px',
-                transform: 'translateY(-50%)',
-                background: 'rgba(0, 0, 0, 0.5)',
-                border: 'none',
-                color: 'white',
-                fontSize: '2rem',
-                cursor: 'pointer',
-                padding: '10px',
-                zIndex: 10,
-              }}
-            >
-              ›
-            </button>
-          </div>
-        )}
+        <div style={{ marginTop: '60px', display: 'flex', justifyContent: 'center' }}>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{
+              width: '300px',
+              height: '400px',
+              borderRadius: '15px',
+              backgroundImage: `url(${jessicaProfile.src})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              cursor: 'pointer',
+            }}
+            onClick={() => handleClickPhoto(jessicaProfile)}
+          />
+        </div>
 
         <AnimatePresence>
           {selectedPhoto && (
@@ -254,15 +130,15 @@ function AboutUs() {
                   maxHeight: '80vh',
                   width: '90%',
                   display: 'flex',
-                  flexDirection: window.innerWidth < 768 ? 'column' : 'row',
-                  alignItems: window.innerWidth < 768 ? 'center' : 'flex-start',
+                  flexDirection: 'column',
+                  alignItems: 'center',
                   gap: '20px',
                 }}
               >
                 <img
                   src={selectedPhoto.modalImg}
                   alt={selectedPhoto.title}
-                  style={{ maxWidth: '40%', height: 'auto' }}
+                  style={{ maxWidth: '100%', height: 'auto', borderRadius: '10px' }}
                 />
                 <div>
                   <h3>{selectedPhoto.title}</h3>
@@ -281,56 +157,9 @@ function AboutUs() {
           )}
         </AnimatePresence>
       </Container>
-
-      {/* Sección de Valores */}
-      <div style={{ backgroundColor: 'white', padding: '60px 20px', position: 'relative' }}>
-        <Container>
-          <Row style={{ marginTop: '50px', borderTop: '1px solid #ccc' }}>
-            {[
-              {
-                letra: 'P',
-                titulo: 'Planteamos',
-                texto:
-                  'Planteamos nuestra opinión, con respeto. Tomamos una posición o defendemos una idea de manera ﬁrme pero respetuosa.',
-              },
-              {
-                letra: 'A',
-                titulo: 'Apoyamos',
-                texto:
-                  'Apoyo mutuo, el equipo se compromete a responsabilizarse por sus acciones, tareas y compromisos.',
-              },
-              {
-                letra: 'T',
-                titulo: 'Toma de decisiones',
-                texto:
-                  'Tomamos decisiones conscientes, actuamos con propósito y basados en la alineación de objetivos del proyecto.',
-              },
-              {
-                letra: 'A',
-                titulo: 'Aprendemos',
-                texto:
-                  'Aprendemos continuamente, buscamos siempre el crecimiento personal y profesional tanto del equipo como de los negocios.',
-              },
-            ].map((valor, index) => (
-              <Col
-                key={index}
-                md="3"
-                style={{ padding: '30px', borderRight: index < 3 ? '1px solid #ccc' : 'none' }}
-              >
-                <h3 style={{ color: '#1c1862', fontWeight: 'bold', textAlign: 'center' }}>
-                  {valor.letra}
-                </h3>
-                <h5 style={{ color: '#1c1862', textAlign: 'center' }}>{valor.titulo}</h5>
-                <p style={{ fontSize: '14px', color: '#555' }}>{valor.texto}</p>
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </div>
-
       <Footer />
-    </>
+    </div>
   );
 }
 
-export default AboutUs;
+export default AboutJessica;

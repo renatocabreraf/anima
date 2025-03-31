@@ -79,7 +79,7 @@ function FooterBlack() {
             {/* Redes sociales centradas */}
             <Col md="4" className="text-center mb-3 mb-md-0">
               <a
-                href="https://www.instagram.com/kindmindgt/"
+                href="https://www.instagram.com/_anima.psicologia/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -90,7 +90,7 @@ function FooterBlack() {
                 />
               </a>
               <a
-                href="https://www.linkedin.com/company/kindmindgt"
+                href="https://www.linkedin.com/in/jessica-ovalle-76083022b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -105,13 +105,13 @@ function FooterBlack() {
             {/* Menú horizontal a la derecha */}
             <Col md="8" className="footer-menu">
               <Link to="/about-us" className="footer-link">
-                Equipo
+                Acerca de
               </Link>
               <Link to="/projects" className="footer-link">
-                Proyectos
+                Blog
               </Link>
               <Link to="/solutions" className="footer-link">
-                Soluciones
+                Contáctanos
               </Link>
             </Col>
           </Row>
