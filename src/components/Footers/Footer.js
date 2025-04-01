@@ -1,144 +1,127 @@
+/*eslint-disable*/
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 
 function Footer() {
   return (
     <>
-      <div
+      {/* CSS embebido */}
+      <style>
+        {`
+          .footer-link {
+            color: white;
+            font-weight: 600;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+          }
+
+          .footer-link:hover {
+            color: #ffb6f9;
+          }
+
+          .social-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.12);
+            padding: 5px;
+            object-fit: contain;
+            filter: brightness(1.1);
+          }
+
+          .social-icon:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.25);
+          }
+
+          .footer-menu {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+          }
+
+          @media (max-width: 768px) {
+            .footer-menu {
+              justify-content: center;
+              margin-top: 20px;
+              flex-direction: column;
+            }
+
+            .footer-link {
+              margin: 5px 0;
+            }
+          }
+
+          .footer-bottom {
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+          }
+        `}
+      </style>
+
+      <footer
+        className="footer"
         style={{
-          //padding: "1px",
-          //margin: "2px auto",
+          backgroundColor: "#580e80",
+          padding: "30px 0 10px 0",
         }}
       >
-        <div style={{ backgroundColor: "#929292", padding: "20px 0" }}>
-          <Container fluid>
-            <Row>
-              <Col
-                md="4"
-                xs="12"
-                style={{
-                  display: "flex",
-                  
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: "white",
-                  fontSize: "1.2rem",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  gap: "20px",
-                }}
+        <Container fluid>
+          <Row className="align-items-center">
+            {/* Redes sociales centradas */}
+            <Col md="4" className="text-center mb-3 mb-md-0">
+              <a
+                href="https://www.instagram.com/_anima.psicologia/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <span>info@kindmindgt.com</span>
-                
-              </Col>
-              <Col
-                md="4"
-                xs="12"
-                style={{
-                  display: "flex",
-                  
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: "white",
-                  fontSize: "1.2rem",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  gap: "20px",
-                }}
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" // ícono cuadrado gris claro
+                  alt="Instagram"
+                  className="social-icon"
+                />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/jessica-ovalle-76083022b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                
-                <a
-                  href="https://wa.me/50247516077?text=%C2%A1Hola!%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20acerca%20de%20sus%20servicios."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  Tel: +502 4751-6077
-                </a>
-              </Col>
-              <Col
-                md="4"
-                xs="12"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "15px",
-                  flexWrap: "wrap",
-                  paddingTop: "10px",
-                  fontWeight: "bold",
-                }}
-              >
-                <a
-                  href="https://www.linkedin.com/company/92917090/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "inherit" }}
-                >
-                  <i
-                    className="fab fa-linkedin"
-                    style={{
-                      fontSize: "2rem",
-                      color: "white",
-                      borderRight: "2px solid darkblue",
-                      paddingRight: "10px",
-                    }}
-                  />
-                </a>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png" // ícono cuadrado gris claro
+                  alt="LinkedIn"
+                  className="social-icon"
+                />
+              </a>
+            </Col>
 
-                <a
-                  href="https://www.facebook.com/profile.php?id=61569560279035"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "inherit" }}
-                >
-                  <i
-                    className="fab fa-facebook"
-                    style={{
-                      fontSize: "2rem",
-                      color: "white",
-                      borderRight: "2px solid darkblue",
-                      paddingRight: "10px",
-                    }}
-                  />
-                </a>
+            {/* Menú horizontal a la derecha */}
+            <Col md="8" className="footer-menu">
+              <Link to="/about-us" className="footer-link">
+                Acerca de
+              </Link>
+             
+              <Link to="/contact-us" className="footer-link">
+                Contáctanos
+              </Link>
+            </Col>
+          </Row>
 
-                <a
-                  href="https://www.instagram.com/kindmindgt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "inherit" }}
-                >
-                  <i
-                    className="fab fa-instagram"
-                    style={{
-                      fontSize: "2rem",
-                      color: "white",
-                      borderRight: "2px solid darkblue",
-                      paddingRight: "10px",
-                    }}
-                  />
-                </a>
-
-                <a
-                  href="https://www.tiktok.com/@kindmindgt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "inherit" }}
-                >
-                  <i
-                    className="fab fa-tiktok"
-                    style={{
-                      fontSize: "2rem",
-                      color: "white",
-                    }}
-                  />
-                </a>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      </div>
+          {/* Línea y copyright centrado */}
+          <Row>
+            <Col className="footer-bottom">
+              ©Copyright {new Date().getFullYear()} Anima Psicología. Developed by Kind Mind Technologies, S.A.
+            </Col>
+          </Row>
+        </Container>
+      </footer>
     </>
   );
 }
