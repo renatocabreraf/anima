@@ -11,7 +11,6 @@ import {
   NavbarBrand,
   Navbar,
   Container,
-  UncontrolledTooltip,
   Button,
 } from "reactstrap";
 
@@ -19,20 +18,14 @@ function ScrollTransparentNavbar() {
   const location = useLocation();
   const showButton = ["/about-us", "/projects", "/solutions"].includes(location.pathname);
 
-  const [navbarColor, setNavbarColor] = useState(" navbar-transparent");
-  const [logoSrc, setLogoSrc] = useState(
-    require("assets/img/anima1.png")
-  );
+  const [scrolled, setScrolled] = useState(false);
+  const [logoSrc, setLogoSrc] = useState(require("assets/img/anima1.png"));
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setNavbarColor("");
-        setLogoSrc(require("assets/img/anima2.png"));
-      } else {
-        setNavbarColor(" navbar-transparent");
-        setLogoSrc(require("assets/img/anima1.png"));
-      }
+      const isScrolled = window.scrollY > 0;
+      setScrolled(isScrolled);
+      setLogoSrc(require(`assets/img/${isScrolled ? "anima2" : "anima1"}.png`));
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -78,7 +71,14 @@ function ScrollTransparentNavbar() {
         `}
       </style>
 
-      <Navbar className={`${navbarColor}`} color="white" expand="lg" sticky="top">
+      <Navbar
+        expand="lg"
+        sticky="top"
+        style={{
+          backgroundColor: scrolled ? "white" : "#4983c6",
+          transition: "background-color 0.3s ease",
+        }}
+      >
         <Container>
           <div
             style={{
@@ -90,10 +90,10 @@ function ScrollTransparentNavbar() {
             }}
           >
             {/* Logo */}
-            <NavbarBrand to="/" tag={Link} id="navbar-brand">
+            <NavbarBrand to="/" tag={Link}>
               <img src={logoSrc} alt="Logo Principal" className="navbar-logo" />
             </NavbarBrand>
-            
+
             {/* Menú horizontal en escritorio */}
             <Nav className="d-none d-lg-flex align-items-center ml-auto">
               {menuOptions.map((item) => (
@@ -136,7 +136,7 @@ function ScrollTransparentNavbar() {
               )}
             </Nav>
 
-            {/* Menú desplegable solo en móvil */}
+            {/* Menú móvil */}
             <div className="d-lg-none" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <UncontrolledDropdown nav>
                 <DropdownToggle caret color="default" nav>
@@ -161,16 +161,16 @@ function ScrollTransparentNavbar() {
                     </DropdownItem>
                   ))}
                   {showButton && (
-                    <DropdownItem divider />
-                  )}
-                  {showButton && (
-                    <DropdownItem
-                      tag="a"
-                      href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2cHr6QweJLZXKEm2eIutWH2S1pB82Slw77iLFpLu6LIx3c5Pz57zto3PMwFIHf2-8bh1Anq4NN"
-                      target="_blank"
-                    >
-                      <p style={{ ...menuItemStyle, color: "#fc71f0" }}>Solo Llámanos</p>
-                    </DropdownItem>
+                    <>
+                      <DropdownItem divider />
+                      <DropdownItem
+                        tag="a"
+                        href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2cHr6QweJLZXKEm2eIutWH2S1pB82Slw77iLFpLu6LIx3c5Pz57zto3PMwFIHf2-8bh1Anq4NN"
+                        target="_blank"
+                      >
+                        <p style={{ ...menuItemStyle, color: "#fc71f0" }}>Solo Llámanos</p>
+                      </DropdownItem>
+                    </>
                   )}
                 </DropdownMenu>
               </UncontrolledDropdown>

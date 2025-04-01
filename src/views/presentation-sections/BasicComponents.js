@@ -5,7 +5,7 @@ import { Container, Row, Col } from "reactstrap";
 function SectionCards() {
   const cards = [
     {
-      title: "Conoce a la Licda. Jessica Ovalle",
+      title: "Conoce a Jessica",
       img: require("assets/img/aboutus.png"),
       path: "/about-us",
     },

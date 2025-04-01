@@ -51,7 +51,7 @@ function AboutJessica() {
             <h2 style={{ fontWeight: 'bold', color: '#333' }}>Sobre la Licda. Jessica Ovalle</h2>
             <img
               alt="Sticker principal"
-              src={require("assets/img/grad.png")}
+              src={require("assets/img/grad2.png")}
               style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
             />
             <br /><br />
