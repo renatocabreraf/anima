@@ -64,7 +64,7 @@ function AboutJessica() {
             </p>
             <img
                 alt="Sticker principal"
-                src={require("assets/img/ppin.png")}
+                src={require("assets/img/sentada.png")}
                 style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
               />
             <img

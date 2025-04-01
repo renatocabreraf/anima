@@ -6,7 +6,7 @@ function SectionCards() {
   const cards = [
     {
       title: "Conoce a Jessica",
-      img: require("assets/img/aboutus.png"),
+      img: require("assets/img/carared.png"),
       path: "/about-us",
     },
     {
