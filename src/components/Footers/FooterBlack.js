@@ -70,7 +70,7 @@ function FooterBlack() {
       <footer
         className="footer"
         style={{
-          backgroundColor: "#580e80",
+          backgroundColor: "#4983c6",
           padding: "30px 0 10px 0",
         }}
       >

@@ -44,6 +44,18 @@ function AboutJessica() {
       }}
     >
       <ScrollTransparentNavbar />
+      <style>
+        {`
+          .zoom-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+          }
+          .zoom-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          }
+        `}
+      </style>
+
       <div className="wrapper"></div>
       <Container style={{ padding: '30px 0' }}>
         <Row>
@@ -51,7 +63,8 @@ function AboutJessica() {
             <h2 style={{ fontWeight: 'bold', color: '#333' }}>Sobre la Licda. Jessica Ovalle</h2>
             <img
               alt="Sticker principal"
-              src={require("assets/img/grad2.png")}
+              src={require("assets/img/sentada3.png")}
+              className="zoom-hover"
               style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
             />
             <br /><br />
@@ -59,25 +72,24 @@ function AboutJessica() {
             <p style={{ fontSize: '20px', color: '#555' }}>
               Jessica Mirella Ovalle Morales es Licenciada en Psicología Clínica con más de cinco años de experiencia trabajando en pro de la salud mental. Ha dedicado gran parte de su trayectoria al acompañamiento psicológico de niños, adolescentes y adultos, y su labor como docente ha sido ampliamente reconocida por su sensibilidad, claridad y vocación.
               <br /><br />
-             
               Ánima nace desde esa experiencia y sensibilidad, como una clínica que ofrece mucho más que consultas: un espacio donde cada persona encuentra comprensión, profesionalismo y calidez. En Ánima, cada historia importa, y cada proceso es acompañado con respeto, ética y humanidad.
             </p>
+
             <img
-                alt="Sticker principal"
-                src={require("assets/img/sentada.png")}
-                style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
-              />
+              alt="Sticker principal"
+              src={require("assets/img/sentada4.png")}
+              className="zoom-hover"
+              style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
+            />
             <img
-                alt="Sticker principal"
-                src={require("assets/img/cara2.png")}
-                style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
-              />
-              <br /><br />
+              alt="Sticker principal"
+              src={require("assets/img/cara2.png")}
+              className="zoom-hover"
+              style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
+            />
+            <br /><br />
           </Col>
         </Row>
-
-       
-        
 
         <AnimatePresence>
           {selectedPhoto && (
