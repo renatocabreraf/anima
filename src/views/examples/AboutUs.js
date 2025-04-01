@@ -10,7 +10,8 @@ const jessicaProfile = {
   modalImg: '/jessica-modal.jpg',
   title: 'Jessica Ovalle',
   subtitle: 'Licenciada en Psicología',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt, sapien eget efficitur facilisis, neque purus dignissim turpis, vitae tincidunt justo quam non nisi.',
+  description:
+    'Jessica Mirella Ovalle Morales es Licenciada en Psicología Clínica con más de cinco años de experiencia en el ámbito de la salud mental. Su formación sólida y su pasión por el bienestar emocional la han llevado a trabajar con distintas poblaciones, especialmente con niñez y adolescencia, donde ha dejado una huella significativa. Además de su práctica clínica, ha sido catedrática universitaria, guiando y formando nuevas generaciones de profesionales desde un enfoque ético, empático y transformador.\n\nÁnima surge como el reflejo de su vocación: brindar un espacio seguro, cálido y profesional donde cada persona pueda sentirse escuchada, comprendida y acompañada. Se distingue por su compromiso humano y profundo respeto por la individualidad de cada historia, marcando una diferencia que trasciende lo clínico y conecta desde lo auténtico.',
   linkedin: 'https://www.linkedin.com/in/jessicaovalle',
 };
 
@@ -47,53 +48,36 @@ function AboutJessica() {
       <Container style={{ padding: '30px 0' }}>
         <Row>
           <Col className="text-center">
-            <h2 style={{ fontWeight: 'bold', color: '#333' }}>Sobre Jessica Ovalle</h2>
+            <h2 style={{ fontWeight: 'bold', color: '#333' }}>Sobre la Licda. Jessica Ovalle</h2>
+            <img
+              alt="Sticker principal"
+              src={require("assets/img/grad.png")}
+              style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
+            />
+            <br /><br />
+           
             <p style={{ fontSize: '20px', color: '#555' }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec justo vel justo scelerisque faucibus.
+              Jessica Mirella Ovalle Morales es Licenciada en Psicología Clínica con más de cinco años de experiencia trabajando en pro de la salud mental. Ha dedicado gran parte de su trayectoria al acompañamiento psicológico de niños, adolescentes y adultos, y su labor como docente ha sido ampliamente reconocida por su sensibilidad, claridad y vocación.
+              <br /><br />
+             
+              Ánima nace desde esa experiencia y sensibilidad, como una clínica que ofrece mucho más que consultas: un espacio donde cada persona encuentra comprensión, profesionalismo y calidez. En Ánima, cada historia importa, y cada proceso es acompañado con respeto, ética y humanidad.
             </p>
+            <img
+                alt="Sticker principal"
+                src={require("assets/img/ppin.png")}
+                style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
+              />
+            <img
+                alt="Sticker principal"
+                src={require("assets/img/cara2.png")}
+                style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
+              />
+              <br /><br />
           </Col>
         </Row>
 
-        <Row className="justify-content-center mt-5">
-          {[1, 2, 3, 4].map((i) => (
-            <Col key={i} md="3" className="mb-4 d-flex justify-content-center">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                style={{
-                  width: '100%',
-                  height: '300px',
-                  borderRadius: '15px',
-                  backgroundImage: `url(/photo${i}.jpg)`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              />
-            </Col>
-          ))}
-        </Row>
-
-        <div style={{ marginTop: '60px', display: 'flex', justifyContent: 'center' }}>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            style={{
-              width: '300px',
-              height: '400px',
-              borderRadius: '15px',
-              backgroundImage: `url(${jessicaProfile.src})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              cursor: 'pointer',
-            }}
-            onClick={() => handleClickPhoto(jessicaProfile)}
-          />
-        </div>
+       
+        
 
         <AnimatePresence>
           {selectedPhoto && (

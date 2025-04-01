@@ -107,10 +107,8 @@ function FooterBlack() {
               <Link to="/about-us" className="footer-link">
                 Acerca de
               </Link>
-              <Link to="/projects" className="footer-link">
-                Blog
-              </Link>
-              <Link to="/solutions" className="footer-link">
+             
+              <Link to="/contact-us" className="footer-link">
                 Contáctanos
               </Link>
             </Col>

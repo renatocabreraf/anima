@@ -48,8 +48,7 @@ function ScrollTransparentNavbar() {
 
   const menuOptions = [
     { label: "Acerca de", path: "/about-us" },
-    { label: "Blog", path: "/projects" },
-    { label: "Contáctanos", path: "/solutions" },
+    { label: "Contáctanos", path: "/contact-us" },
   ];
 
   return (
@@ -127,11 +126,11 @@ function ScrollTransparentNavbar() {
                       e.target.style.backgroundColor = "#fc71f0";
                       e.target.style.color = "white";
                     }}
-                    href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2cHr6QweJLZXKEm2eIutWH2S1pB82Slw77iLFpLu6LIx3c5Pz57zto3PMwFIHf2-8bh1Anq4NN"
+                    href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1BF2wEKe6fsiUARcnRzR2CjV4-7h5x17XJ0D0MXS71WKgdjC26jsIsXBUhf_kijEqxYh1oWCOQ?gv=true"
                     target="_blank"
                     aria-label="Agendar reunión"
                   >
-                    Solo Llámanos
+                    Realiza tu Cita
                   </Button>
                 </NavItem>
               )}
@@ -142,7 +141,7 @@ function ScrollTransparentNavbar() {
               <UncontrolledDropdown nav>
                 <DropdownToggle caret color="default" nav>
                   <img
-                    src="https://cdn.kindmindgt.com/assets/img/Isotipo_Dark Blue.png"
+                    src={require("assets/img/cara1.png")}
                     alt="Ícono de Menú"
                     className="navbar-menu-icon"
                   />

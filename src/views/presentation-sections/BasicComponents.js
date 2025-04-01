@@ -10,20 +10,14 @@ function SectionCards() {
       path: "/about-us",
     },
     {
-      title: "Publicaciones que pueden interesarte",
-      img: require("assets/img/blog.png"),
-      path: "/projects",
-    },
-    {
       title: "Contáctanos para más información",
       img: require("assets/img/contacto.png"),
-      path: "/solutions",
+      path: "/contact-us",
     },
   ];
 
   return (
     <>
-      {/* CSS embebido */}
       <style>
         {`
           .card-image {
@@ -49,13 +43,19 @@ function SectionCards() {
           .card-link {
             text-decoration: none;
           }
+
+          @media (min-width: 768px) {
+            .centered-row {
+              justify-content: center;
+            }
+          }
         `}
       </style>
 
       <Container className="my-5">
-        <Row>
+        <Row className="centered-row d-flex">
           {cards.map((card, index) => (
-            <Col md="4" className="mb-4" key={index}>
+            <Col md="5" sm="10" xs="12" className="mb-4" key={index}>
               <Link to={card.path} className="card-link">
                 <img src={card.img} alt={card.title} className="card-image" />
                 <div className="card-title">{card.title}</div>

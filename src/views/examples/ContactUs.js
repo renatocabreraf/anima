@@ -1,350 +1,159 @@
-import React from "react";
-import { useAlert } from 'react-alert'
-import axios from 'axios';
-// reactstrap components
-import {
-  Button,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
-
-// core components
-import ContactUsHeader from "components/Headers/ContactUsHeader.js";
-import Footer from "components/Footers/Footer.js";
+// PulseBlog.js (versión blog con publicaciones + Instagram)
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "reactstrap";
 import ScrollTransparentNavbar from "components/Navbars/ScrollTransparentNavbar";
 import FooterBlack from "components/Footers/FooterBlack";
+import { Button } from "reactstrap";
+function ContactoAnima() {
+  const [scrolled, setScrolled] = useState(false);
 
-function ContactUs() {
-  const [nameFocus, setNameFocus] = React.useState(false);
-  const [emailFocus, setEmailFocus] = React.useState(false);
-  const [numberFocus, setNumberFocus] = React.useState(false);
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [number, setNumber] = React.useState("");
-  const [message, setMessage] = React.useState("");
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
 
-  const alert = useAlert()
-  const handleSubmit = (e) => {
-    axios.post('https://a2giloiaf7.execute-api.us-east-1.amazonaws.com/default/SendContactEmail', {senderName: name, senderEmail:email, senderPhone:number , message: message})
-      .then(response => {
-        response.status === 200 ? alert.show("Mensaje enviado correctamente") : alert.show("Ha ocurrido un error al enviar el mensaje");
-          return response.data;      
-      })
-      .catch(error => {
-        console.log(error.response);
-        alert.show("Lo sentimos, el mensaje no pudo ser enviado");
-      })
-    setName("");
-    setEmail("");
-    setNumber("");
-    setMessage("");
-    e.preventDefault();
-  }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  React.useEffect(() => {
-    document.body.classList.add("contact-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("contact-page");
-      document.body.classList.remove("sidebar-collapse");
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://calendar.google.com/calendar/scheduling-button-script.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    const link = document.createElement("link");
+    link.href = "https://calendar.google.com/calendar/scheduling-button-script.css";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+
+    script.onload = () => {
+      if (window.calendar) {
+        window.calendar.schedulingButton.load({
+          url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1BF2wEKe6fsiUARcnRzR2CjV4-7h5x17XJ0D0MXS71WKgdjC26jsIsXBUhf_kijEqxYh1oWCOQ?gv=true",
+          color: "#fc71f0",
+          label: "Reserva tu Cita",
+          target: document.getElementById("calendar-button")
+        });
+
+        // Aplicar estilo personalizado al botón una vez cargado
+        setTimeout(() => {
+          const calendarBtn = document.querySelector(".Gc__Button");
+          if (calendarBtn) {
+            calendarBtn.style.backgroundColor = "#fc71f0";
+            calendarBtn.style.border = "2px solid #E0C4DF";
+            calendarBtn.style.color = "white";
+            calendarBtn.style.fontWeight = "bold";
+            calendarBtn.style.padding = "10px 20px";
+            calendarBtn.style.borderRadius = "30px";
+            calendarBtn.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
+            calendarBtn.style.transition = "all 0.3s ease";
+          }
+        }, 500);
+      }
     };
   }, []);
 
   return (
     <>
-      <ScrollTransparentNavbar />
-      <div className="wrapper">
-        <ContactUsHeader />
-        <div className="main">
-          <div className="contact-content">
-            <Container>
-              <Row>
-                <Col className="ml-auto mr-auto" md="5">
-                  <h2 className="title">Envíanos un mensaje</h2>
-                  <p className="description">
-                    Puedes contactarnos con cualquier consulta respecto a nuestros servicios.
-                    Nos pondremos en contacto contigo lo más pronto posible. <br></br>
-                    <br></br>
-                  </p>
-                  <Form id="contact-form" role="form" onSubmit={e => handleSubmit(e)}>
-                    <label>Tu nombre</label>
-                    <InputGroup
-                      className={nameFocus ? "input-group-focus" : ""}
-                    >
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="now-ui-icons users_circle-08"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        aria-label="Tu nombre..."
-                        autoComplete="name"
-                        placeholder="Tu nombre..."
-                        type="text"
-                        value={name}
-                        onFocus={() => setNameFocus(true)}
-                        onChange={(e) => setName(e.target.value)}
-                        onBlur={() => setNameFocus(false)}
-                      ></Input>
-                    </InputGroup>
-                    <label>Email</label>
-                    <InputGroup
-                      className={emailFocus ? "input-group-focus" : ""}
-                    >
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="now-ui-icons ui-1_email-85"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        aria-label="Email..."
-                        autoComplete="email"
-                        placeholder="Email..."
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onFocus={() => setEmailFocus(true)}
-                        onBlur={() => setEmailFocus(false)}
-                      ></Input>
-                    </InputGroup>
-                    <label>Teléfono</label>
-                    <InputGroup
-                      className={numberFocus ? "input-group-focus" : ""}
-                    >
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="now-ui-icons tech_mobile"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        autoComplete="number"
-                        placeholder="Teléfono ..."
-                        type="text"
-                        value={number}
-                        onChange={(e) => setNumber(e.target.value)}
-                        onFocus={() => setNumberFocus(true)}
-                        onBlur={() => setNumberFocus(false)}
-                      ></Input>
-                    </InputGroup>
-                    <FormGroup>
-                      <label>Tu mensaje</label>
-                      <Input
-                        id="message"
-                        name="message"
-                        rows="6"
-                        type="textarea"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                      ></Input>
-                    </FormGroup>
-                    <div className="submit text-center">
-                      <Button
-                        className="btn-raised btn-round"
-                        color="info"
-                        defaultValue="Contact Us"
-                        type="submit"
-                      >
-                        Enviar
-                      </Button>
-                    </div>
-                  </Form>
-                </Col>
-                <Col className="ml-auto mr-auto" md="5"
-              >
-                  <div className="info info-horizontal mt-5">
-                    <div className="icon icon-info">
-                      <i className="now-ui-icons business_bulb-63"></i>
-                    </div>
-                    <div className="description"
-                    >
-                      <h4 className="info-title"
-                      >Materializamos tus ideas</h4>
-                      <p
-                      >
-                        Listanos tus requerimientos, <br></br>
-                        envíanos tus ideas, <br></br>
-                        disfruta el resultado.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="info info-horizontal">
-                    <div className="icon icon-info">
-                      <i className="now-ui-icons tech_mobile"></i>
-                    </div>
-                    <div className="description">
-                      <h4 className="info-title">¿Tienes una pregunta? Ponte en contacto con nosotros</h4>
-                      <p>
-                        info@kindmindgt.com <br></br>
-               
-                        Lunes - Domingo, 9:00-22:00
-                        +502 4751-6077
-                      </p>
-                    </div>
-                  </div>
-                  <div className="info info-horizontal">
-                    <div className="icon icon-info">
-                      <i className="business_briefcase-24 now-ui-icons"></i>
-                    </div>
-                    <div className="description">
-                      <h4 className="info-title">Ficha de Negocio</h4>
-                      <p>
-                        Kind Mind Technologies, Sociedad Anónima. <br></br>
-                        NIT: 120340747 <br></br>
-                        Ciudad de Guatemala <br></br>
-                       
-                      </p>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-        </div>
-        <div>
-          <div style={{ backgroundColor: "#929292", padding: "20px 0" }}>
-            <Container fluid>
-              <Row>
-                <Col
-                  md="4"
-                  xs="12"
-                  style={{
-                    display: "flex",
-                    
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    fontSize: "1.2rem",
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    gap: "20px",
-                  }}
-                >
-                  <span>info@kindmindgt.com</span>
-                  
-                </Col>
-                <Col
-                  md="4"
-                  xs="12"
-                  style={{
-                    display: "flex",
-                    
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    fontSize: "1.2rem",
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    gap: "20px",
-                  }}
-                >
-                  
-                  <a
-                    href="https://wa.me/50247516077?text=%C2%A1Hola!%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20acerca%20de%20sus%20servicios."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "white", textDecoration: "none" }}
-                  >
-                    Tel: +502 4751-6077
-                  </a>
-                </Col>
-                <Col
-                  md="4"
-                  xs="12"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: "15px",
-                    flexWrap: "wrap",
-                    paddingTop: "10px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <a
-                    href="https://www.linkedin.com/company/92917090/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "inherit" }}
-                  >
-                    <i
-                      className="fab fa-linkedin"
-                      style={{
-                        fontSize: "2rem",
-                        color: "white",
-                        borderRight: "2px solid darkblue",
-                        paddingRight: "10px",
-                      }}
-                    />
-                  </a>
-
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61569560279035"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "inherit" }}
-                  >
-                    <i
-                      className="fab fa-facebook"
-                      style={{
-                        fontSize: "2rem",
-                        color: "white",
-                        borderRight: "2px solid darkblue",
-                        paddingRight: "10px",
-                      }}
-                    />
-                  </a>
-
-                  <a
-                    href="https://www.instagram.com/kindmindgt"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "inherit" }}
-                  >
-                    <i
-                      className="fab fa-instagram"
-                      style={{
-                        fontSize: "2rem",
-                        color: "white",
-                        borderRight: "2px solid darkblue",
-                        paddingRight: "10px",
-                      }}
-                    />
-                  </a>
-
-                  <a
-                    href="https://www.tiktok.com/@kindmindgt"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "inherit" }}
-                  >
-                    <i
-                      className="fab fa-tiktok"
-                      style={{
-                        fontSize: "2rem",
-                        color: "white",
-                      }}
-                    />
-                  </a>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-        </div>
-        <FooterBlack />
+      <div style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 1000 }}>
+        <ScrollTransparentNavbar scrolled={scrolled} />
       </div>
+
+      <div
+        style={{
+          backgroundColor: scrolled ? "white" : "#E1F2F5",
+          transition: "background-color 0.5s ease",
+          paddingTop: "250px",
+          paddingBottom: "60px",
+          minHeight: "100vh",
+        }}
+      >
+        <Container>
+          <Row>
+            <Col md="6" className="mb-5 text-center">
+              <img
+                alt="Sticker principal"
+                src={require("assets/img/6d01b25a-2387-4be7-b21b-bff22917864d.png")}
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  margin: "0 auto",
+                }}
+              />
+               <Button
+                style={{
+                  backgroundColor: "#fc71f0",
+                  border: "2px solid #E0C4DF",
+                  color: "white",
+                  fontWeight: "bold",
+                  padding: "10px 20px",
+                  borderRadius: "30px",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = "white";
+                  e.target.style.color = "#fc71f0";
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = "#fc71f0";
+                  e.target.style.color = "white";
+                }}
+                href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1BF2wEKe6fsiUARcnRzR2CjV4-7h5x17XJ0D0MXS71WKgdjC26jsIsXBUhf_kijEqxYh1oWCOQ?gv=true"
+                target="_blank"
+                aria-label="Agendar reunión"
+              >
+                Realiza tu Cita
+              </Button>
+            </Col>
+
+            <Col md="6">
+              <div >
+                
+                <div className="description">
+                  <h4 className="info-title" style={{ fontSize: "1.6rem", fontWeight: "700", color: "#1c1862" }}>Tu bienestar emocional comienza aquí</h4>
+                  <p style={{ fontSize: "1.1rem", fontWeight: "500" }}>Una clínica creada para escucharte, guiarte y acompañarte en tu proceso.</p>
+                </div>
+              </div>
+              <div >
+               
+                <div className="description">
+                  <h4 className="info-title" style={{ fontSize: "1.6rem", fontWeight: "700", color: "#1c1862" }}>Contáctanos directamente</h4>
+                  <p style={{ fontSize: "1.1rem", fontWeight: "500" }}>
+                    jessyovalle@gmail.com <br />
+                    Lunes a Viernes de 3:00 pm a 6:00 pm <br />
+                    Sábados de 8:00 am a 12:00 pm <br />
+                    Tel: 5834-0613
+                  </p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+          {/* Incrustado de Instagram */}
+              <Container className="text-center my-5">
+                <h2 style={{ fontWeight: "bold", marginBottom: "30px", color: "#1c1862" }}>
+                  Síguenos en Instagram
+                </h2>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <iframe
+                    src="https://www.instagram.com/_anima.psicologia/embed"
+                    width="400"
+                    height="480"
+                    frameBorder="0"
+                    scrolling="no"
+                    allowtransparency="true"
+                    title="Instagram Anima Psicología"
+                    style={{ borderRadius: "10px" }}
+                  ></iframe>
+                </div>
+              </Container>
+      </div>
+
+      <FooterBlack />
     </>
   );
 }
 
-export default ContactUs;
-
+export default ContactoAnima;
