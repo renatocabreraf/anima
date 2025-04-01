@@ -106,6 +106,9 @@ function ContactoAnima() {
               >
                 Realiza tu Cita
               </Button>
+              <p style={{ fontSize: "1.1rem", fontWeight: "500" }}>
+                    Al realizar tu cita, recibirás un correo de confirmación para asegurar el espacio de tu consulta.
+                  </p>
             </Col>
 
             <Col md="6">
