@@ -117,7 +117,7 @@ function FooterBlack() {
           {/* Línea y copyright centrado */}
           <Row>
             <Col className="footer-bottom">
-              ©Copyright {new Date().getFullYear()} Anima Psicología. Developed by Kind Mind Technologies, S.A.
+              ©Copyright {new Date().getFullYear()} Anima Psicología. <a href="https://www.kindmindgt.com" color="white">Developed by Kind Mind Technologies, S.A.</a>
             </Col>
           </Row>
         </Container>

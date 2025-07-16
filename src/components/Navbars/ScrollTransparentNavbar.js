@@ -126,7 +126,7 @@ function ScrollTransparentNavbar() {
                       e.target.style.backgroundColor = "#fc71f0";
                       e.target.style.color = "white";
                     }}
-                    href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1BF2wEKe6fsiUARcnRzR2CjV4-7h5x17XJ0D0MXS71WKgdjC26jsIsXBUhf_kijEqxYh1oWCOQ?gv=true"
+                    href="https://calendar.app.google/bB4swe6daRdAjotW8"
                     target="_blank"
                     aria-label="Agendar reunión"
                   >
